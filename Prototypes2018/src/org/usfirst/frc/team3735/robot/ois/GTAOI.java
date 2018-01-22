@@ -26,10 +26,14 @@ public class GTAOI implements DriveOI{
 
 		main.start.whenPressed(new ExpDrive());
 		
-		main.a.toggleWhenPressed(new MotorsOn(new int[] {4,6}, .5, "Side Intakes"));
-		main.a.toggleWhenPressed(new MotorsOn(new int[] {5}, .5, "Bottom Roller"));
+		main.a.toggleWhenPressed(new MotorsOn(new int[] {4,5}, .5, "Side Intakes"));
+		main.a.toggleWhenPressed(new MotorsOn(new int[] {6}, .5, "Bottom Roller"));
+		
+		main.b.toggleWhenPressed(new MotorsOn(new int[] {4,5}, -.5, "inv Side Intakes"));
+		main.b.toggleWhenPressed(new MotorsOn(new int[] {6}, -.5, "inv Bottom Roller"));
 //		main.x.whileHeld(new DriveAddSensitiveLeft());
 //		main.y.whileHeld(new DriveAddSensitiveRight());
+		
 
 //		main.start.whenPressed(new DriveChangeToGearDirection());
 //		main.back.whenPressed(new DriveChangeToBallDirection());

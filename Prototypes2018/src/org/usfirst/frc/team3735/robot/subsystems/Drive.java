@@ -140,41 +140,22 @@ public class Drive extends Subsystem {
 		//l1.configNominalOutputVoltage(0.0, -0.0);
 		l1.configNominalOutputForward(0, 0);
 		l1.configNominalOutputReverse(0, 0);
-		l1.configPeakOutputForward(.5, 0);
-		l1.configPeakOutputReverse(.5, 0);
-		//l1.setPosition(0);
-		
-		
-//		absolutePosition = r1.getPulseWidthPosition() & 0xFFF;
-//		
-//		r1.reverseOutput(true);
-//		r1.setEncPosition(absolutePosition);
-//		r1.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-//		r1.reverseSensor(false);
-//		r1.configNominalOutputVoltage(0.0f, -0.0);
-//		r1.configPeakOutputVoltage(5, -5);
-//		r1.setPosition(0);
-		
-		//int absolutePosition = l1.getPulseWidthPosition() & 0xFFF;
-		absolutePosition = l1.getSelectedSensorPosition(0) & 0xFFF;
+		l1.configPeakOutputForward(1, 0);
+		l1.configPeakOutputReverse(-1, 0);
 
-		//l1.reverseOutput(false); <--- setinverted does this instead
+		absolutePosition = r1.getSelectedSensorPosition(0) & 0xFFF;
+
 		
-		//l1.setEncPosition(absolutePosition);
-		l1.setSelectedSensorPosition(absolutePosition, 0, 0);
+		r1.setSelectedSensorPosition(absolutePosition, 0, 0);
 		
-		//l1.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
-		l1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
+		r1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
 		
-		//l1.reverseSensor(true);
-		l1.setSensorPhase(false);
+		r1.setSensorPhase(false);
 		
-		//l1.configNominalOutputVoltage(0.0, -0.0);
-		l1.configNominalOutputForward(0, 0);
-		l1.configNominalOutputReverse(0, 0);
-		l1.configPeakOutputForward(.5, 0);
-		l1.configPeakOutputReverse(.5, 0);
-		//l1.setPosition(0);
+		r1.configNominalOutputForward(0, 0);
+		r1.configNominalOutputReverse(0, 0);
+		r1.configPeakOutputForward(1, 0);
+		r1.configPeakOutputReverse(-1, 0);
 
 	}
 	
