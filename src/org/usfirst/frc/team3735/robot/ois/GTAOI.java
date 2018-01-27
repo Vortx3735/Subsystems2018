@@ -2,11 +2,14 @@ package org.usfirst.frc.team3735.robot.ois;
 
 //import org.usfirst.frc.team3735.robot.commands.DriveTurnToAngleHyperbola;
 import org.usfirst.frc.team3735.robot.commands.*;
+import org.usfirst.frc.team3735.robot.commands.cubeintake.*;
 import org.usfirst.frc.team3735.robot.commands.drive.ExpDrive;
 import org.usfirst.frc.team3735.robot.commands.drive.simple.DriveAddSensitiveLeft;
 import org.usfirst.frc.team3735.robot.commands.drive.simple.DriveAddSensitiveRight;
+import org.usfirst.frc.team3735.robot.commands.elevator.*;
 import org.usfirst.frc.team3735.robot.util.oi.DriveOI;
 import org.usfirst.frc.team3735.robot.util.oi.XboxController;
+import org.usfirst.frc.team3735.robot.util.settings.Setting;
 
 public class GTAOI implements DriveOI{
 
@@ -26,11 +29,32 @@ public class GTAOI implements DriveOI{
 
 		main.start.whenPressed(new ExpDrive());
 		
-		main.a.toggleWhenPressed(new MotorsOn(new int[] {4,5}, .5, "Side Intakes"));
-		main.a.toggleWhenPressed(new MotorsOn(new int[] {6}, .5, "Bottom Roller"));
+		main.a.whileHeld(new CubeIntakeRollersIn());
+		main.b.whileHeld(new CubeIntakeRollersOut());
 		
-		main.b.toggleWhenPressed(new MotorsOn(new int[] {4,5}, -.5, "inv Side Intakes"));
-		main.b.toggleWhenPressed(new MotorsOn(new int[] {6}, -.5, "inv Bottom Roller"));
+		main.lb.toggleWhenPressed(new SwitchLeftSolenoid());
+		main.rb.toggleWhenPressed(new SwitchRightSolenoid());
+		main.y.toggleWhenPressed(new SwitchSolenoids());
+		
+		main.pov0.whileHeld(new ElevatorUp());
+		main.pov180.whileHeld(new ElevatorDown());
+		
+		//Setting intakePower = new Setting("intakePower", .5);
+//		main.a.whileHeld(new MotorsOn(new int[] {4,5}, intakePower.getValueFetched(), "Side Intakes"));//4,5
+//		//main.a.toggleWhenPressed(new MotorsOn(new int[] {6}, .5, "Bottom Roller"));
+//		
+//		main.b.whileHeld(new MotorsOn(new int[] {4,5}, -(intakePower.getValueFetched()), "inv Side Intakes"));//toggleWhenPressed
+		
+//		main.x.toggleWhenPressed(new MotorsOn(new int[] {4,5}, 0, "off Side Intakes"));
+//		
+//		main.a.whileHeld(new MotorsOn(new int[] {4}, intakePower.getValueFetched(), "Side Intakes"));
+//		main.a.whileHeld(new MotorsOn(new int[] {5}, -(intakePower.getValueFetched()), "Side Intakes"));
+//		
+//		main.b.whileHeld(new MotorsOn(new int[] {4}, -(intakePower.getValueFetched()), "inv Side Intakes"));
+//		main.b.whileHeld(new MotorsOn(new int[] {5}, intakePower.getValueFetched(), "inv Side Intakes"));
+		
+		
+		//main.b.toggleWhenPressed(new MotorsOn(new int[] {6}, -.5, "inv Bottom Roller"));
 //		main.x.whileHeld(new DriveAddSensitiveLeft());
 //		main.y.whileHeld(new DriveAddSensitiveRight());
 		

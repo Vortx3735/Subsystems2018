@@ -27,5 +27,13 @@ public class Constants {
 
 	}
 	
+	public class CubeIntake{
+		public static final double cubeIntakeSpeed = .5;
+	}
+	
+	public class Elevator{
+		public static final double elevatorSpeed = 1.0;
+	}
+	
 
 }
