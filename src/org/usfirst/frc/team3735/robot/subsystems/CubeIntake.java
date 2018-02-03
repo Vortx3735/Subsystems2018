@@ -5,6 +5,7 @@ import org.usfirst.frc.team3735.robot.settings.RobotMap;
 import org.usfirst.frc.team3735.robot.util.settings.Setting;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -17,8 +18,8 @@ public class CubeIntake extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
-	private WPI_TalonSRX leftMotor;
-	private WPI_TalonSRX rightMotor;
+	private WPI_VictorSPX leftMotor;
+	private WPI_VictorSPX rightMotor;
 	
 	private Solenoid leftSolenoid;
 	private Solenoid rightSolenoid;
@@ -29,8 +30,8 @@ public class CubeIntake extends Subsystem {
 	private boolean rightSolenoidOut;
 	
 	public CubeIntake(){
-		leftMotor = new WPI_TalonSRX(RobotMap.CubeIntake.leftMotor);
-		rightMotor = new WPI_TalonSRX(RobotMap.CubeIntake.rightMotor);
+		leftMotor = new WPI_VictorSPX(RobotMap.CubeIntake.leftMotor);
+		rightMotor = new WPI_VictorSPX(RobotMap.CubeIntake.rightMotor);
 		
 		leftSolenoid = new Solenoid(RobotMap.CubeIntake.leftSolenoid);
 		rightSolenoid = new Solenoid(RobotMap.CubeIntake.rightSolenoid);

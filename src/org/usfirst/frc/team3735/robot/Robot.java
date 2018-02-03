@@ -9,6 +9,7 @@ import org.usfirst.frc.team3735.robot.subsystems.Drive;
 import org.usfirst.frc.team3735.robot.subsystems.Elevator;
 import org.usfirst.frc.team3735.robot.subsystems.Navigation;
 import org.usfirst.frc.team3735.robot.subsystems.Vision;
+import org.usfirst.frc.team3735.robot.subsystems.Climber;
 import org.usfirst.frc.team3735.robot.util.bases.VortxIterative;
 import org.usfirst.frc.team3735.robot.util.settings.BooleanSetting;
 import org.usfirst.frc.team3735.robot.util.settings.Setting;
@@ -34,6 +35,7 @@ public class Robot extends VortxIterative {
 	public static Vision vision;
 	public static CubeIntake cubeIntake;
 	public static Elevator elevator;
+	public static Climber climber;
 	
 	public static GTAOI oi;
 	
@@ -50,6 +52,7 @@ public class Robot extends VortxIterative {
 		vision = new Vision();
 		cubeIntake = new CubeIntake();
 		elevator = new Elevator();
+		climber = new Climber();
 		
 		oi = new GTAOI(); //MUST be instantiated after the subsystems
 		

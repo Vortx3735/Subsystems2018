@@ -47,22 +47,32 @@ package org.usfirst.frc.team3735.robot.settings;
 public class RobotMap {
 
 	public static class Drive{
-		public static int leftMotor1 =		3;
-		public static int leftMotor2 = 		2;
+		public static int leftMotor1 =		2;
+		public static int leftMotor2 = 		3;
 		
-		public static int rightMotor1 = 	8;
-		public static int rightMotor2 = 	7;
+		public static int rightMotor1 = 	11;
+		public static int rightMotor2 = 	10;
 	}
 	
 	public static class CubeIntake{
-		public static int leftMotor = 4;
-		public static int rightMotor = 5;
+		public static int leftMotor = 1;
+		public static int rightMotor = 12;
 		
 		public static int leftSolenoid = 1;
 		public static int rightSolenoid = 2;
 	}
 	
 	public static class Elevator{
-		public static int motor = 6;
+		public static int motor1 = 8;
+		public static int motor2 = 9;
+		
+		public static int leftMotor = 4;
+		public static int rightMotor = 5;
+	}
+	
+	public static class Climber{
+		public static int motor = 7;
+		
+		public static int solendoid = 3;
 	}
 }

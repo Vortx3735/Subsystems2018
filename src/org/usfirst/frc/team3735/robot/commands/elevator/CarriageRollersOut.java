@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ElevatorDown extends Command {
+public class CarriageRollersOut extends Command {
 
-    public ElevatorDown() {
+    public CarriageRollersOut() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.elevator);
@@ -21,7 +21,8 @@ public class ElevatorDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevator.setMotorsCurrent(-(Robot.elevator.getSpeedSmartDashboard()));
+    	Robot.elevator.setLeftMotorCurrent(-(Robot.elevator.getCarriageSpeedSmartDashboard()));
+    	Robot.elevator.setLeftMotorCurrent((Robot.elevator.getCarriageSpeedSmartDashboard()));
     }
 
     // Make this return true when this Command no longer needs to run execute()

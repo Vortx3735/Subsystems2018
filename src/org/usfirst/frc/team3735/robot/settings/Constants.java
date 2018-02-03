@@ -33,7 +33,12 @@ public class Constants {
 	
 	public class Elevator{
 		public static final double elevatorSpeed = 1.0;
+		public static final double carriageSpeed = 1.0;
 	}
 	
+	public class Climber{
+		public static final double initialSpeed = 0.5;
+		public static final double tensionSpeed = 1.0;		
+	}
 
 }

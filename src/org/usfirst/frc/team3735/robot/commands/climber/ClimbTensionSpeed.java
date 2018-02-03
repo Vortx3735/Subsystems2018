@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3735.robot.commands.elevator;
+package org.usfirst.frc.team3735.robot.commands.climber;
 
 import org.usfirst.frc.team3735.robot.Robot;
 
@@ -7,12 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ElevatorDown extends Command {
+public class ClimbTensionSpeed extends Command {
 
-    public ElevatorDown() {
+    public ClimbTensionSpeed() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.elevator);
     }
 
     // Called just before this Command runs the first time
@@ -21,7 +20,7 @@ public class ElevatorDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevator.setMotorsCurrent(-(Robot.elevator.getSpeedSmartDashboard()));
+    	Robot.climber.setMotorCurrent(Robot.climber.getTensionSpeedSmartDashboard());
     }
 
     // Make this return true when this Command no longer needs to run execute()
