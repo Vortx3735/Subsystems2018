@@ -21,12 +21,9 @@ public class ElevatorMove extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		if (Math.abs(Robot.oi.getElevatorTrim()) > 0.1) {
-			Robot.elevator.setElevatorLeftCurrent((-Robot.oi.getElevatorTrim()) * Robot.elevator.getCorrectionMultiplierSmartDashboard());
-			Robot.elevator.setElevatorRightCurrent(Robot.oi.getElevatorTrim() * Robot.elevator.getCorrectionMultiplierSmartDashboard());
-		} else {
-			Robot.elevator.setElevatorMotorsCurrent(Robot.oi.getElevatorMove() * Robot.elevator.getMultiplierSmartDashboard());
-		}
+			Robot.elevator.setElevatorLeftCurrent(Robot.oi.getElevatorMove() + (-Robot.oi.getElevatorTrim() * Robot.elevator.getCorrectionMultiplierSmartDashboard()));
+			Robot.elevator.setElevatorRightCurrent( Robot.oi.getElevatorMove() + Robot.oi.getElevatorTrim() * Robot.elevator.getCorrectionMultiplierSmartDashboard());
+
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

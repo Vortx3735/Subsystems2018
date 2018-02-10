@@ -7,9 +7,11 @@ import org.usfirst.frc.team3735.robot.util.settings.Setting;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -52,7 +54,7 @@ public class Elevator extends Subsystem {
 		speed = new Setting("Elevator Speed", Constants.Elevator.elevatorSpeed);
 		carriageSpeed = new Setting("Carriage Speed", Constants.Elevator.carriageSpeed);
 		elevatorMultiplier = new Setting("Elevator Move Multiplier", Constants.Elevator.elevatorMultiplier);
-		correctionMultiplier = new Setting("Elevator Correcnt Multiplier", Constants.Elevator.correctionMultiplier);
+		correctionMultiplier = new Setting("Elevator Correct Multiplier", Constants.Elevator.correctionMultiplier);
 		
 		dPLeft = new Setting("dPLeft", Constants.Elevator.dPLeft);
 		dILeft = new Setting("dILeft", Constants.Elevator.dILeft);
@@ -66,8 +68,16 @@ public class Elevator extends Subsystem {
 		dFRight = new Setting("dFRight", Constants.Elevator.dFRight);
 		iZoneRight = new Setting("iZoneRight", Constants.Elevator.iZoneRight);
 		
+		
+		elevatorLeft.setNeutralMode(NeutralMode.Brake);
+		elevatorRight.setNeutralMode(NeutralMode.Brake);
+		
+		elevatorRight.setInverted(true);
+		
+		
 		setUpSensors();
-		setupForPositionControl();
+		resetEncoderPositions();
+		//setupForPositionControl();
 		//setUpSlaves();
 	}
 	
@@ -153,16 +163,38 @@ public class Elevator extends Subsystem {
 	}
 	
 	public void setElevatorMotorsCurrent(double speed){
-		elevatorLeft.set(ControlMode.Position, speed);
-		elevatorRight.set(ControlMode.Position, speed);
+		elevatorLeft.set(ControlMode.PercentOutput, speed);
+		elevatorRight.set(ControlMode.PercentOutput, speed);
     }
 	
 	public void setElevatorLeftCurrent(double speed){
-		elevatorLeft.set(ControlMode.Position, speed);
+		elevatorLeft.set(ControlMode.PercentOutput, speed);
 	} 
 	public void setElevatorRightCurrent(double speed){
-		elevatorRight.set(ControlMode.Position, speed);
+		elevatorRight.set(ControlMode.PercentOutput, speed);
 	} 
+	
+	public void setElevatorLeftPosition(double position){
+		elevatorLeft.set(ControlMode.Position, position);	
+	}
+	
+	
+	public void setElevatorRightPosition(double position){
+		elevatorRight.set(ControlMode.Position, position);
+	}
+	
+	public void setElevatorPostion(double position){
+		setElevatorLeftPosition(position);
+		setElevatorRightPosition(position);
+	}
+	public void moveElevatorInches(double inches){
+		double ticksToMove = (inches*Constants.Elevator.ticksPerInch);
+		//double positionLeft = ticksToMove 
+		elevatorLeft.set(ControlMode.Position, inches*Constants.Elevator.ticksPerInch);
+		elevatorRight.set(ControlMode.Position, inches*Constants.Elevator.ticksPerInch);
+	}
+	
+	
 	
     public double getSpeedSmartDashboard(){
     	return speed.getValueFetched();
@@ -170,17 +202,25 @@ public class Elevator extends Subsystem {
     public double getCarriageSpeedSmartDashboard(){
     	return carriageSpeed.getValueFetched();
     }
+    
     public double getMultiplierSmartDashboard(){
     	return elevatorMultiplier.getValueFetched();
     }
     public double getCorrectionMultiplierSmartDashboard(){
     	return correctionMultiplier.getValueFetched();
     }
+    
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     	setDefaultCommand(new ElevatorMove());
+    }
+    
+    public void log(){
+    	SmartDashboard.putNumber("Elevator Left Pos", this.elevatorLeft.getSelectedSensorPosition(0));
+    	SmartDashboard.putNumber("Elevator Right Pos", this.elevatorRight.getSelectedSensorPosition(0));
+
     }
 }
 

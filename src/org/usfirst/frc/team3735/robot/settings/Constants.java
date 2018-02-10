@@ -35,16 +35,18 @@ public class Constants {
 		public static final double elevatorSpeed = 0.5;
 		public static final double carriageSpeed = 1.0;
 		
-		public static final double elevatorMultiplier = 0.5;
-		public static final double correctionMultiplier = 0.1;
+		public static final double elevatorMultiplier = 0.2;
+		public static final double correctionMultiplier = 0.01;
 		
-		public static final double dPLeft = 1.0;
+		public static final double ticksPerInch =500; 
+		
+		public static final double dPLeft = 1/ticksPerInch;
 		public static final double dILeft = 0.0;
 		public static final double dDLeft = 0.0;
 		public static final double dFLeft = 0.0;
 		public static final int iZoneLeft = 2;
 		
-		public static final double dPRight = 1.0;
+		public static final double dPRight = 1/ticksPerInch;
 		public static final double dIRight = 0.0;
 		public static final double dDRight = 0.0;
 		public static final double dFRight = 0.0;
