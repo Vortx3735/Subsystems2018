@@ -21,8 +21,8 @@ public class CarriageRollersIn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevator.setLeftMotorCurrent(Robot.elevator.getCarriageSpeedSmartDashboard());
-    	Robot.elevator.setLeftMotorCurrent(-(Robot.elevator.getCarriageSpeedSmartDashboard()));
+    	Robot.elevator.setCarriageLeftCurrent(Robot.elevator.getCarriageSpeedSmartDashboard());
+    	Robot.elevator.setCarriageRightCurrent(-(Robot.elevator.getCarriageSpeedSmartDashboard()));
     }
 
     // Make this return true when this Command no longer needs to run execute()

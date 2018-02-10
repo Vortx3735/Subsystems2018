@@ -32,8 +32,23 @@ public class Constants {
 	}
 	
 	public class Elevator{
-		public static final double elevatorSpeed = 1.0;
+		public static final double elevatorSpeed = 0.5;
 		public static final double carriageSpeed = 1.0;
+		
+		public static final double elevatorMultiplier = 0.5;
+		public static final double correctionMultiplier = 0.1;
+		
+		public static final double dPLeft = 1.0;
+		public static final double dILeft = 0.0;
+		public static final double dDLeft = 0.0;
+		public static final double dFLeft = 0.0;
+		public static final int iZoneLeft = 2;
+		
+		public static final double dPRight = 1.0;
+		public static final double dIRight = 0.0;
+		public static final double dDRight = 0.0;
+		public static final double dFRight = 0.0;
+		public static final int iZoneRight = 2;
 	}
 	
 	public class Climber{

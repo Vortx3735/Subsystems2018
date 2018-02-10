@@ -83,6 +83,14 @@ public class GTAOI implements DriveOI{
 		//return main.getRightX();
 	}
 	
+	public double getElevatorMove(){
+		return main.getRightY();
+	}
+	
+	public double getElevatorTrim(){
+		return main.getRightX();
+	}
+	
 	@Override
 	public double getFODMag() {
 		//return main.getRightMagnitude();
