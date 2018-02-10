@@ -187,11 +187,23 @@ public class Elevator extends Subsystem {
 		setElevatorLeftPosition(position);
 		setElevatorRightPosition(position);
 	}
+	public void moveLeftElevatorInches(double inches){
+		double ticksToMove = (inches*Constants.Elevator.ticksPerInch);
+		double positionLeft = ticksToMove + elevatorLeft.getSelectedSensorPosition(0);
+		elevatorLeft.set(ControlMode.Position, positionLeft);
+	}
+	public void moveRightElevatorInches(double inches){
+		double ticksToMove = (inches*Constants.Elevator.ticksPerInch);
+		double positionRight = ticksToMove + elevatorRight.getSelectedSensorPosition(0);
+		elevatorRight.set(ControlMode.Position, positionRight);
+	}
 	public void moveElevatorInches(double inches){
 		double ticksToMove = (inches*Constants.Elevator.ticksPerInch);
-		//double positionLeft = ticksToMove 
-		elevatorLeft.set(ControlMode.Position, inches*Constants.Elevator.ticksPerInch);
-		elevatorRight.set(ControlMode.Position, inches*Constants.Elevator.ticksPerInch);
+		System.out.println("TicksToMove: " + ticksToMove);
+		double positionLeft = ticksToMove + elevatorLeft.getSelectedSensorPosition(0);
+		double positionRight = ticksToMove + elevatorRight.getSelectedSensorPosition(0);
+		elevatorLeft.set(ControlMode.Position, positionLeft);
+		elevatorRight.set(ControlMode.Position, positionRight);
 	}
 	
 	

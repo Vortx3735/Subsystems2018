@@ -23,8 +23,8 @@ public class GTAOI implements DriveOI{
 		main.rb.get();
 		//Baby Driver
 		//main.pov180.whenPressed(new DriveGoToPeg());
-		main.pov90.whileHeld(new DriveAddSensitiveRight());
-		main.pov270.whileHeld(new DriveAddSensitiveLeft());
+		//main.pov90.whileHeld(new DriveAddSensitiveRight());
+		//main.pov270.whileHeld(new DriveAddSensitiveLeft());
 
 
 		main.start.whenPressed(new ExpDrive());
@@ -36,8 +36,13 @@ public class GTAOI implements DriveOI{
 		main.rb.toggleWhenPressed(new SwitchRightSolenoid());
 		main.y.toggleWhenPressed(new SwitchSolenoids());
 		
-		main.pov0.whileHeld(new ElevatorUp());
-		main.pov180.whileHeld(new ElevatorDown());
+		//main.x.toggleWhenPressed(new ElevatorMoveInches(1));
+		
+		
+		main.pov0.toggleWhenPressed(new ElevatorMoveInches(1));
+		main.pov180.toggleWhenPressed(new ElevatorMoveInches(-1));
+		main.pov90.toggleWhenPressed(new MoveRightElevatorInches(1));
+		main.pov270.toggleWhenPressed(new MoveLeftElevatorInches(1));
 		
 		//Setting intakePower = new Setting("intakePower", .5);
 //		main.a.whileHeld(new MotorsOn(new int[] {4,5}, intakePower.getValueFetched(), "Side Intakes"));//4,5

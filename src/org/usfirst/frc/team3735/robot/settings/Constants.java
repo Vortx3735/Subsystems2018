@@ -35,10 +35,10 @@ public class Constants {
 		public static final double elevatorSpeed = 0.5;
 		public static final double carriageSpeed = 1.0;
 		
-		public static final double elevatorMultiplier = 0.2;
-		public static final double correctionMultiplier = 0.01;
+		public static final double elevatorMultiplier = 0.4;
+		public static final double correctionMultiplier = 0.005;
 		
-		public static final double ticksPerInch =500; 
+		public static final double ticksPerInch =835.22; 
 		
 		public static final double dPLeft = 1/ticksPerInch;
 		public static final double dILeft = 0.0;
