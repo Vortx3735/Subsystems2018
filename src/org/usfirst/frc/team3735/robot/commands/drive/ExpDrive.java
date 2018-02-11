@@ -48,13 +48,13 @@ private static Setting moveReactivity = new Setting("Move Reactivity", Constants
     	super.initialize();
 
     	Robot.drive.setupDriveForSpeedControl();
-    	moveSetValue	= Robot.drive.getCurrentPercent();
+    	moveSetValue	= 0.0;
     	turnSetValue	= 0.0;
     	
 		moveMotor		= 0.0;
 		turnMotor		= 0.0;
 		
-		moveMotorPrev 	= moveSetValue;
+		moveMotorPrev 	= 0;
 		turnMotorPrev 	= 0.0;
 
     }

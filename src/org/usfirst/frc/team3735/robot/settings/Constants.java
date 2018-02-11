@@ -4,7 +4,7 @@ public class Constants {
 	
 	public class Drive{
 		
-		public static final double InchesPerRotation = 12.94;	//in inches
+		public static final double InchesPerRotation = 0;	//in inches
 		
 		//exp drive
 		public static final double moveReactivity = 1;	//(0,1] (least reactive, most reactive]
@@ -23,7 +23,7 @@ public class Constants {
 		public static final boolean isUsingLeftEncoders = true;
 		public static final boolean isUsingRightEncoders = true;
 		
-		public static final double MAX_SPEED = 100; //in inches per second
+		public static final double MAX_SPEED = 0; //in inches per second
 
 	}
 	
@@ -35,20 +35,20 @@ public class Constants {
 		public static final double elevatorSpeed = 0.5;
 		public static final double carriageSpeed = 1.0;
 		
-		public static final double elevatorMultiplier = 0.4;
-		public static final double correctionMultiplier = 0.005;
+		public static final double elevatorMultiplier = 0.5;
+		public static final double correctionMultiplier = 0.12;
 		
 		public static final double ticksPerInch =835.22; 
 		
-		public static final double dPLeft = 1/ticksPerInch;
-		public static final double dILeft = 0.0;
-		public static final double dDLeft = 0.0;
+		public static final double dPLeft = 80;
+		public static final double dILeft = .15;
+		public static final double dDLeft = 60;
 		public static final double dFLeft = 0.0;
 		public static final int iZoneLeft = 2;
 		
-		public static final double dPRight = 1/ticksPerInch;
-		public static final double dIRight = 0.0;
-		public static final double dDRight = 0.0;
+		public static final double dPRight = 80;
+		public static final double dIRight = .15;
+		public static final double dDRight = 60;
 		public static final double dFRight = 0.0;
 		public static final int iZoneRight = 2;
 	}

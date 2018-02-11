@@ -1,5 +1,6 @@
 package org.usfirst.frc.team3735.robot.subsystems;
 
+import org.usfirst.frc.team3735.robot.commands.elevator.BlankPID;
 import org.usfirst.frc.team3735.robot.commands.elevator.ElevatorMove;
 import org.usfirst.frc.team3735.robot.settings.Constants;
 import org.usfirst.frc.team3735.robot.settings.RobotMap;
@@ -10,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -32,16 +34,19 @@ public class Elevator extends Subsystem {
 	private Setting elevatorMultiplier;
 	private Setting correctionMultiplier;
 	
-	private Setting dPLeft;
-	private Setting dILeft;
-	private Setting dDLeft;
-	private Setting dFLeft;
+//	private Setting dPLeft;
+//	private Setting dILeft;
+//	private Setting dDLeft;
+//	private Setting dFLeft;
+	private PIDController leftPID;
 	private Setting iZoneLeft;
 	
-	private Setting dPRight;
-	private Setting dIRight;
-	private Setting dDRight;
-	private Setting dFRight;
+//	private Setting dPRight;
+//	private Setting dIRight;
+//	private Setting dDRight;
+//	private Setting dFRight;
+	
+	private PIDController rightPID;
 	private Setting iZoneRight;
 	
 	public Elevator(){
@@ -56,16 +61,21 @@ public class Elevator extends Subsystem {
 		elevatorMultiplier = new Setting("Elevator Move Multiplier", Constants.Elevator.elevatorMultiplier);
 		correctionMultiplier = new Setting("Elevator Correct Multiplier", Constants.Elevator.correctionMultiplier);
 		
-		dPLeft = new Setting("dPLeft", Constants.Elevator.dPLeft);
-		dILeft = new Setting("dILeft", Constants.Elevator.dILeft);
-		dDLeft = new Setting("dDLeft", Constants.Elevator.dDLeft);
-		dFLeft = new Setting("dFLeft", Constants.Elevator.dFLeft);
+		leftPID = new PIDController(Constants.Elevator.dPLeft, Constants.Elevator.dILeft, Constants.Elevator.dDRight, new BlankPID(), new BlankPID());
+		rightPID = new PIDController(Constants.Elevator.dPLeft, Constants.Elevator.dILeft, Constants.Elevator.dDRight, new BlankPID(), new BlankPID());
+
+		SmartDashboard.putData("Left PID", leftPID);
+		SmartDashboard.putData("Right PID", rightPID);
+//		dPLeft = new Setting("dPLeft", Constants.Elevator.dPLeft);
+//		dILeft = new Setting("dILeft", Constants.Elevator.dILeft);
+//		dDLeft = new Setting("dDLeft", Constants.Elevator.dDLeft);
+//		dFLeft = new Setting("dFLeft", Constants.Elevator.dFLeft);
 		iZoneLeft = new Setting("iZoneLeft", Constants.Elevator.iZoneLeft);
 		
-		dPRight = new Setting("dPRight", Constants.Elevator.dPRight);
-		dIRight = new Setting("dIRight", Constants.Elevator.dIRight);
-		dDRight = new Setting("dDRight", Constants.Elevator.dDRight);
-		dFRight = new Setting("dFRight", Constants.Elevator.dFRight);
+//		dPRight = new Setting("dPRight", Constants.Elevator.dPRight);
+//		dIRight = new Setting("dIRight", Constants.Elevator.dIRight);
+//		dDRight = new Setting("dDRight", Constants.Elevator.dDRight);
+//		dFRight = new Setting("dFRight", Constants.Elevator.dFRight);
 		iZoneRight = new Setting("iZoneRight", Constants.Elevator.iZoneRight);
 		
 		
@@ -143,23 +153,26 @@ public class Elevator extends Subsystem {
 	
 	public void setupForPositionControl() {
 		//setPIDFSettings(dP,dI,dD,dF);
-		setElevatorLeftPIDF(dPLeft.getValueFetched(), dILeft.getValueFetched(), dDLeft.getValueFetched(), dFLeft.getValueFetched());
-		setElevatorRightPIDF(dPRight.getValueFetched(), dIRight.getValueFetched(), dDRight.getValueFetched(), dFRight.getValueFetched());
+//		setElevatorLeftPIDF(dPLeft.getValueFetched(), dILeft.getValueFetched(), dDLeft.getValueFetched(), dFLeft.getValueFetched());
+//		setElevatorRightPIDF(dPRight.getValueFetched(), dIRight.getValueFetched(), dDRight.getValueFetched(), dFRight.getValueFetched());
 		
 		elevatorLeft.configAllowableClosedloopError(0, 0, 0);
-		elevatorLeft.config_IntegralZone(0, (int)iZoneLeft.getValueFetched(), 0);	
+//		elevatorLeft.config_IntegralZone(0, (int)iZoneLeft.getValue(), 0);	
 		
 		elevatorRight.configAllowableClosedloopError(0, 0, 0);
-		elevatorRight.config_IntegralZone(0, (int)iZoneRight.getValueFetched(), 0);
+//		elevatorRight.config_IntegralZone(0, (int)iZoneRight.getValue(), 0);
+		updatePID();
 	}
 
 	
 	public void resetEncoderPositions(){
-		int absolutePosition = elevatorLeft.getSelectedSensorPosition(0) & 0xFFF;
-		elevatorLeft.setSelectedSensorPosition(absolutePosition, 0, 0);
+		//int absolutePosition = elevatorLeft.getSelectedSensorPosition(0) & 0x0000;
+		elevatorLeft.setSelectedSensorPosition(0, 0, 0);
 		
-		absolutePosition = elevatorRight.getSelectedSensorPosition(0) & 0xFFF;
-		elevatorRight.setSelectedSensorPosition(absolutePosition, 0, 0);
+		//I think we can just pass in zero with the new stuff like so put we should test it
+		
+		//absolutePosition = elevatorRight.getSelectedSensorPosition(0) & 0x0000;
+		elevatorRight.setSelectedSensorPosition(0, 0, 0);
 	}
 	
 	public void setElevatorMotorsCurrent(double speed){
@@ -199,27 +212,39 @@ public class Elevator extends Subsystem {
 	}
 	public void moveElevatorInches(double inches){
 		double ticksToMove = (inches*Constants.Elevator.ticksPerInch);
-		System.out.println("TicksToMove: " + ticksToMove);
-		double positionLeft = ticksToMove + elevatorLeft.getSelectedSensorPosition(0);
-		double positionRight = ticksToMove + elevatorRight.getSelectedSensorPosition(0);
-		elevatorLeft.set(ControlMode.Position, positionLeft);
-		elevatorRight.set(ControlMode.Position, positionRight);
+//		System.out.println("TicksToMove: " + ticksToMove);
+//		double positionLeft = ticksToMove + elevatorLeft.getSelectedSensorPosition(0);
+//		double positionRight = ticksToMove + elevatorRight.getSelectedSensorPosition(0);
+		elevatorLeft.set(ControlMode.Position, ticksToMove);
+		elevatorRight.set(ControlMode.Position, ticksToMove);
 	}
 	
 	
 	
     public double getSpeedSmartDashboard(){
-    	return speed.getValueFetched();
+    	return speed.getValue();
     }
     public double getCarriageSpeedSmartDashboard(){
-    	return carriageSpeed.getValueFetched();
+    	return carriageSpeed.getValue();
     }
     
     public double getMultiplierSmartDashboard(){
-    	return elevatorMultiplier.getValueFetched();
+    	return elevatorMultiplier.getValue();
     }
     public double getCorrectionMultiplierSmartDashboard(){
-    	return correctionMultiplier.getValueFetched();
+    	return correctionMultiplier.getValue();
+    }
+    /*
+     * 2 = 
+     */
+    public void updatePID() {
+//    	this.setElevatorLeftPIDF(dPLeft.getValue(), dILeft.getValue(), dDLeft.getValue(), dFLeft.getValue());
+//    	this.setElevatorLeftPIDF(dPRight.getValue(), dPRight.getValue(), dPRight.getValue(), dPRight.getValue());
+    	this.setElevatorLeftPIDF(leftPID.getP()/Constants.Elevator.ticksPerInch, leftPID.getI()/Constants.Elevator.ticksPerInch, leftPID.getD()/Constants.Elevator.ticksPerInch, leftPID.getF());
+    	elevatorLeft.config_IntegralZone(0,  (int)(iZoneLeft.getValue() * Constants.Elevator.ticksPerInch), 0);
+    	this.setElevatorRightPIDF(rightPID.getP()/Constants.Elevator.ticksPerInch, rightPID.getI()/Constants.Elevator.ticksPerInch, rightPID.getD()/Constants.Elevator.ticksPerInch, rightPID.getF());
+    	elevatorLeft.config_IntegralZone(0,  (int)(iZoneRight.getValue() * Constants.Elevator.ticksPerInch), 0);
+
     }
     
 
@@ -232,6 +257,9 @@ public class Elevator extends Subsystem {
     public void log(){
     	SmartDashboard.putNumber("Elevator Left Pos", this.elevatorLeft.getSelectedSensorPosition(0));
     	SmartDashboard.putNumber("Elevator Right Pos", this.elevatorRight.getSelectedSensorPosition(0));
+    	SmartDashboard.putNumber("Elevator Left Inches", this.elevatorLeft.getSelectedSensorPosition(0)/Constants.Elevator.ticksPerInch);
+    	SmartDashboard.putNumber("Elevator Right Inches", this.elevatorRight.getSelectedSensorPosition(0)/Constants.Elevator.ticksPerInch);
+
 
     }
 }

@@ -39,10 +39,10 @@ public class GTAOI implements DriveOI{
 		//main.x.toggleWhenPressed(new ElevatorMoveInches(1));
 		
 		
-		main.pov0.toggleWhenPressed(new ElevatorMoveInches(1));
-		main.pov180.toggleWhenPressed(new ElevatorMoveInches(-1));
-		main.pov90.toggleWhenPressed(new MoveRightElevatorInches(1));
-		main.pov270.toggleWhenPressed(new MoveLeftElevatorInches(1));
+//		main.pov0.toggleWhenPressed(new ElevatorMoveInches(1));
+//		main.pov180.toggleWhenPressed(new ElevatorMoveInches(-1));
+//		main.pov90.toggleWhenPressed(new MoveRightElevatorInches(1));
+//		main.pov270.toggleWhenPressed(new MoveLeftElevatorInches(1));
 		
 		//Setting intakePower = new Setting("intakePower", .5);
 //		main.a.whileHeld(new MotorsOn(new int[] {4,5}, intakePower.getValueFetched(), "Side Intakes"));//4,5
