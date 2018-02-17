@@ -7,11 +7,10 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ElevatorDown extends Command {
+public class ElevatorCorrectRight extends Command {
 
-    public ElevatorDown() {
+    public ElevatorCorrectRight() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
     	requires(Robot.elevator);
     }
 
@@ -21,7 +20,8 @@ public class ElevatorDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevator.setElevatorMotorsCurrent(-Robot.elevator.getMultiplierSmartDashboard());
+    	Robot.elevator.setElevatorLeftCurrent(-Robot.elevator.getCorrectionMultiplierSmartDashboard());
+    	Robot.elevator.setElevatorRightCurrent(Robot.elevator.getCorrectionMultiplierSmartDashboard());
     }
 
     // Make this return true when this Command no longer needs to run execute()

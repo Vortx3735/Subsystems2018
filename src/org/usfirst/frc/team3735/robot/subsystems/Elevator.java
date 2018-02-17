@@ -38,7 +38,7 @@ public class Elevator extends Subsystem {
 		elevatorRight = new VorTxTalon(RobotMap.Elevator.elevatorRight, "Elevator Right", true);
 		
 		elevatorMultiplier = new Setting("Elevator Move Multiplier", Constants.Elevator.elevatorMultiplier);
-		correctionMultiplier = new Setting("Elevator Correct Multiplier", Constants.Elevator.correctionMultiplier);
+		correctionMultiplier = new Setting("Elevator Trim Multiplier", Constants.Elevator.correctionMultiplier);
 		
 		elevatorLeft.setNeutralMode(NeutralMode.Brake);
 		elevatorRight.setNeutralMode(NeutralMode.Brake);
