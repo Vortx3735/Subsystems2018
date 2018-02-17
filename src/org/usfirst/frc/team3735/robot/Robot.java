@@ -3,7 +3,7 @@ package org.usfirst.frc.team3735.robot;
 import org.usfirst.frc.team3735.robot.commands.auto.DoNothing;
 import org.usfirst.frc.team3735.robot.commands.drive.positions.ResetPosition;
 import org.usfirst.frc.team3735.robot.commands.drive.positions.ZeroYaw;
-import org.usfirst.frc.team3735.robot.commands.elevator.ElevatorMoveInches;
+import org.usfirst.frc.team3735.robot.commands.elevator.ElevatorSetPosition;
 import org.usfirst.frc.team3735.robot.commands.elevator.ElevatorResetPosition;
 import org.usfirst.frc.team3735.robot.ois.GTAOI;
 import org.usfirst.frc.team3735.robot.subsystems.CubeIntake;
@@ -83,7 +83,7 @@ public class Robot extends VortxIterative {
 		
 		SmartDashboard.putData("Reset Position", new ResetPosition());
 		SmartDashboard.putData("Zero Yaw", new ZeroYaw());
-		SmartDashboard.putData(new ElevatorMoveInches(new Setting("Inches Position to Move", 0)));
+		SmartDashboard.putData(new ElevatorSetPosition(new Setting("Inches Position to Move", 0)));
 		SmartDashboard.putData("Elevator Reset", new ElevatorResetPosition());
 //		SmartDashboard.putData(new RecordVoltageData());
 //		SmartDashboard.putData(new SendSDVoltage());

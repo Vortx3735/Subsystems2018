@@ -40,6 +40,8 @@ public class CubeIntake extends Subsystem {
 		
 		leftSolenoidOut = false;
 		rightSolenoidOut = false;
+		
+		rightMotor.setInverted(true);
 	}
 	
 	public void setLeftMotorCurrent(double speed){
@@ -48,6 +50,11 @@ public class CubeIntake extends Subsystem {
 	
 	public void setRightMotorCurrent(double speed){
 		rightMotor.set(speed);
+	}
+	
+	public void setMotorsCurrent(double speed){
+		setLeftMotorCurrent(speed);
+		setRightMotorCurrent(speed);
 	}
 	
 	public double getDashboardSpeed(){

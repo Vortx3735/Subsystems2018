@@ -21,8 +21,7 @@ public class CubeIntakeRollersIn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.cubeIntake.setLeftMotorCurrent(Robot.cubeIntake.getDashboardSpeed());
-    	Robot.cubeIntake.setRightMotorCurrent(-(Robot.cubeIntake.getDashboardSpeed()));
+    	Robot.cubeIntake.setMotorsCurrent(Robot.cubeIntake.getDashboardSpeed());
     }
 
     // Make this return true when this Command no longer needs to run execute()
