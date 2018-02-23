@@ -22,22 +22,23 @@ public class GTAOI implements DriveOI{
 		co = new XboxController(1);
 		main.rb.get();
 
-		main.start.whenPressed(new ExpDrive());
-		
-		main.a.whileHeld(new CubeIntakeRollersIn());
-		main.b.whileHeld(new CubeIntakeRollersOut());
-		
-		main.lb.toggleWhenPressed(new SwitchLeftSolenoid());
-		main.rb.toggleWhenPressed(new SwitchRightSolenoid());
-		main.y.toggleWhenPressed(new SwitchSolenoids());
-		
-		main.pov0.whileHeld(new ElevatorUp());
-		main.pov180.whileHeld(new ElevatorDown());
-		
-		co.pov0.whileHeld(new ElevatorUp());
-		co.pov180.whileHeld(new ElevatorDown());
-		co.pov90.whileHeld(new ElevatorCorrectRight());
-		co.pov270.whileHeld(new ElevatorCorrectLeft());
+		int[] motors = {8,9};
+		main.a.whileHeld(new MotorsOn(motors,0.5));
+		main.b.whileHeld(new MotorsOn(motors,-0.5));
+//		main.start.whenPressed(new ExpDrive());
+//		
+//		main.a.whileHeld(new CubeIntakeRollersIn());
+//		main.b.whileHeld(new CubeIntakeRollersOut());
+//		
+//		main.y.toggleWhenPressed(new SwitchSolenoid());
+//		
+//		main.pov0.whileHeld(new ElevatorUp());
+//		main.pov180.whileHeld(new ElevatorDown());
+//		
+//		co.pov0.whileHeld(new ElevatorUp());
+//		co.pov180.whileHeld(new ElevatorDown());
+//		co.pov90.whileHeld(new ElevatorCorrectRight());
+//		co.pov270.whileHeld(new ElevatorCorrectLeft());
 		//main.x.toggleWhenPressed(new ElevatorMoveInches(1));
 		
 		

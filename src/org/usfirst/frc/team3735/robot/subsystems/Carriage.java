@@ -5,7 +5,6 @@ import org.usfirst.frc.team3735.robot.settings.RobotMap;
 import org.usfirst.frc.team3735.robot.util.settings.Setting;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -13,51 +12,42 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class CubeIntake extends Subsystem {
+public class Carriage extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-
-	private WPI_VictorSPX leftMotor;
-	private WPI_VictorSPX rightMotor;
 	
-	private Solenoid solenoid;
+	WPI_TalonSRX carriageLeft;
+	WPI_TalonSRX carriageRight;
 	
-	private Setting cubeIntakeSpeed;
-	
+	Solenoid solenoid;
 	private boolean solenoidOut;
 	
-	public CubeIntake(){
-		leftMotor = new WPI_VictorSPX(RobotMap.CubeIntake.leftMotor);
-		rightMotor = new WPI_VictorSPX(RobotMap.CubeIntake.rightMotor);
+	private Setting carriageSpeed;
+	
+	public Carriage(){
+		carriageLeft = new WPI_TalonSRX(RobotMap.Carriage.carriageLeft);
+		carriageRight = new WPI_TalonSRX(RobotMap.Carriage.carraigeRight);
+		carriageSpeed = new Setting("Carriage Speed", Constants.Carriage.carriageSpeed);
 		
-		solenoid = new Solenoid(RobotMap.CubeIntake.solenoid);
+		solenoid = new Solenoid(RobotMap.Carriage.solenoid);
 		
-		cubeIntakeSpeed = new Setting("Cube Intake Speed", Constants.CubeIntake.cubeIntakeSpeed);
-		
+		carriageRight.setInverted(true);
 		solenoidOut = false;
-		
-		rightMotor.setInverted(true);
 	}
 	
-	public void setLeftMotorCurrent(double speed){
-		leftMotor.set(speed);
+	public void setCarriageLeftCurrent(double speed){
+		carriageLeft.set(speed);
 	}
 	
-	public void setRightMotorCurrent(double speed){
-		rightMotor.set(speed);
+	public void setCarriageRightCurrent(double speed){
+		carriageRight.set(speed);
 	}
 	
-	public void setMotorsCurrent(double speed){
-		setLeftMotorCurrent(speed);
-		setRightMotorCurrent(speed);
+	public void setCarriageCurrent(double speed){
+		setCarriageLeftCurrent(speed);
+		setCarriageRightCurrent(speed);
 	}
-	
-	public double getDashboardSpeed(){
-		return cubeIntakeSpeed.getValueFetched();
-	}
-	
-	
 	
 	public void solenoidOut(){
 		solenoid.set(true);
@@ -74,8 +64,13 @@ public class CubeIntake extends Subsystem {
 			solenoidIn();
 		}else{
 			solenoidOut();
-		}	
+		}
 	}
+	
+	 public double getCarriageSpeedSmartDashboard(){
+	    	return carriageSpeed.getValue();
+	    }
+
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());

@@ -1,6 +1,5 @@
 package org.usfirst.frc.team3735.robot.subsystems;
 
-import org.usfirst.frc.team3735.robot.commands.elevator.BlankPID;
 import org.usfirst.frc.team3735.robot.commands.elevator.ElevatorMove;
 import org.usfirst.frc.team3735.robot.settings.Constants;
 import org.usfirst.frc.team3735.robot.settings.RobotMap;
@@ -24,10 +23,10 @@ public class Elevator extends Subsystem {
 	VorTxTalon elevatorLeft;
 	VorTxTalon elevatorRight;
 	
-	WPI_TalonSRX carriageLeft;
-	WPI_TalonSRX carriageRight;
-	
-	private Setting carriageSpeed;
+//	WPI_TalonSRX carriageLeft;
+//	WPI_TalonSRX carriageRight;
+//	
+//	private Setting carriageSpeed;
 	
 	private Setting elevatorMultiplier;
 	private Setting correctionMultiplier;
@@ -44,31 +43,30 @@ public class Elevator extends Subsystem {
 		elevatorRight.setNeutralMode(NeutralMode.Brake);
 		
 		elevatorRight.setInverted(true);
-		carriageRight.setInverted(true);
 		
 		setUpSensors();
 		resetEncoderPositions();
 		
-		carriageLeft = new WPI_TalonSRX(RobotMap.Elevator.carriageLeft);
-		carriageRight = new WPI_TalonSRX(RobotMap.Elevator.carraigeRight);
-		carriageSpeed = new Setting("Carriage Speed", Constants.Elevator.carriageSpeed);
+//		carriageLeft = new WPI_TalonSRX(RobotMap.Elevator.carriageLeft);
+//		carriageRight = new WPI_TalonSRX(RobotMap.Elevator.carraigeRight);
+//		carriageSpeed = new Setting("Carriage Speed", Constants.Elevator.carriageSpeed);
 
 		//setupForPositionControl();
 		//setUpSlaves();
 	}
 	
-	public void setCarriageLeftCurrent(double speed){
-		carriageLeft.set(speed);
-	}
-	
-	public void setCarriageRightCurrent(double speed){
-		carriageRight.set(speed);
-	}
-	
-	public void setCarriageCurrent(double speed){
-		setCarriageLeftCurrent(speed);
-		setCarriageRightCurrent(speed);
-	}
+//	public void setCarriageLeftCurrent(double speed){
+//		carriageLeft.set(speed);
+//	}
+//	
+//	public void setCarriageRightCurrent(double speed){
+//		carriageRight.set(speed);
+//	}
+//	
+//	public void setCarriageCurrent(double speed){
+//		setCarriageLeftCurrent(speed);
+//		setCarriageRightCurrent(speed);
+//	}
 	
 	public void setUpSensors(){
 		elevatorLeft.initSensor(FeedbackDevice.QuadEncoder);
@@ -116,11 +114,6 @@ public class Elevator extends Subsystem {
 //		elevatorLeft.set(ControlMode.Position, ticksToMove);
 //		elevatorRight.set(ControlMode.Position, ticksToMove);
 //	}
-
-	
-    public double getCarriageSpeedSmartDashboard(){
-    	return carriageSpeed.getValue();
-    }
     
     public double getMultiplierSmartDashboard(){
     	return elevatorMultiplier.getValue();
