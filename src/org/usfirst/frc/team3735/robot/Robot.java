@@ -1,4 +1,4 @@
-package org.usfirst.frc.team3735.robot;
+package src.org.usfirst.frc.team3735.robot;
 
 import org.usfirst.frc.team3735.robot.commands.auto.DoNothing;
 import org.usfirst.frc.team3735.robot.commands.drive.positions.ResetPosition;
@@ -9,6 +9,7 @@ import org.usfirst.frc.team3735.robot.ois.GTAOI;
 import org.usfirst.frc.team3735.robot.subsystems.CubeIntake;
 import org.usfirst.frc.team3735.robot.subsystems.Drive;
 import org.usfirst.frc.team3735.robot.subsystems.Elevator;
+import org.usfirst.frc.team3735.robot.subsystems.LEDS;
 import org.usfirst.frc.team3735.robot.subsystems.Navigation;
 import org.usfirst.frc.team3735.robot.subsystems.Vision;
 import org.usfirst.frc.team3735.robot.subsystems.Climber;
@@ -40,10 +41,10 @@ public class Robot extends VortxIterative {
 	public static Climber climber;
 	
 	public static GTAOI oi;
-	
+	LEDS ICU = new LEDS();
 	SendableChooser<Command> autonomousChooser;
 	Command autonomousCommand;
-	
+
 	public static SendableChooser<Alliance> allianceChooser;
 	public static Alliance alliance;
 	@Override
@@ -110,6 +111,7 @@ public class Robot extends VortxIterative {
 		navigation.resetPosition();
         autonomousCommand = autonomousChooser.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
+        ICU.SendDataAutonomous();
 	}
 	@Override
 	public void autonomousPeriodic() {
@@ -128,6 +130,7 @@ public class Robot extends VortxIterative {
     }
 	@Override
 	public void teleopPeriodic() {
+		 ICU.SendDataTeleop();
 	}
 	@Override
 	public void teleopContinuous() {
